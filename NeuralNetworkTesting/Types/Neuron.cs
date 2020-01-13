@@ -7,26 +7,8 @@ namespace NeuralNetworkTesting.Types
 {
     public class Neuron : INeuron
     {
-        #region Constructors
-
-        public Neuron(double bias)
-        {
-            m_bias = new NeuralFactor(bias);
-            m_error = 0;
-            m_input = new Dictionary<INeuronSignal, NeuralFactor>();
-        }
-
-        #endregion
-
-        #region Member Variables
-
-        private Dictionary<INeuronSignal, NeuralFactor> m_input;
-        double m_output, m_error, m_lastError;
-        NeuralFactor m_bias;
-
-        #endregion
-
-        #region INeuronSignal Members
+        //The weight needs to be passed in as a double.
+        public NeuralFactor BiasWeight { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public double Output
         {
@@ -34,19 +16,27 @@ namespace NeuralNetworkTesting.Types
             set { m_output = value; }
         }
 
-        #endregion
+        public double LastError
+        {
+            get { return m_lastError; }
+            set { m_lastError = value; }
+        }
 
-        #region INeuronReceptor Members
+        private readonly Dictionary<INeuronSignal, NeuralFactor> m_input;
+        double m_output, m_error, m_lastError;
+        NeuralFactor m_bias;
 
         public Dictionary<INeuronSignal, NeuralFactor> Input
         {
             get { return m_input; }
         }
 
-        #endregion
-
-        #region INeuron Members
-
+        public Neuron(double bias)
+        {
+            m_bias = new NeuralFactor(bias);
+            m_error = 0;
+            m_input = new Dictionary<INeuronSignal, NeuralFactor>();
+        }
         public void Pulse(INeuralLayer layer)
         {
             lock (this)
@@ -89,28 +79,16 @@ namespace NeuralNetworkTesting.Types
         public void InitializeLearning(INeuralLayer layer)
         {
             foreach (KeyValuePair<INeuronSignal, NeuralFactor> m in m_input)
-                m.Value.ResetWeightChange();
+            { m.Value.ResetWeightChange(); }
 
             m_bias.ResetWeightChange();
         }
 
-        public double LastError
-        {
-            get { return m_lastError; }
-            set { m_lastError = value; }
-        }
-
-        public NeuralFactor BiasWeight { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        #endregion
-
-        #region Private Static Utility Methods
+      
 
         public static double Sigmoid(double value)
         {
             return 1 / (1 + Math.Exp(-value));
         }
-
-        #endregion
     }
 }

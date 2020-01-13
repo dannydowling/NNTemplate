@@ -1,10 +1,8 @@
 namespace NeuralNetworkTesting
 {
     partial class TrainingForm
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
+    {        
+        /// Required designer variable.        
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
@@ -42,7 +40,7 @@ namespace NeuralNetworkTesting
             this.btnTrain.Name = "btnTrain";
             this.btnTrain.Size = new System.Drawing.Size(126, 23);
             this.btnTrain.TabIndex = 0;
-            this.btnTrain.Text = "Perform X-OR Training";
+            this.btnTrain.Text = "Train the models";
             this.btnTrain.UseVisualStyleBackColor = true;
             this.btnTrain.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -72,7 +70,7 @@ namespace NeuralNetworkTesting
             this.ckA.Name = "ckA";
             this.ckA.Size = new System.Drawing.Size(33, 17);
             this.ckA.TabIndex = 3;
-            this.ckA.Text = "A";
+            this.ckA.Text = "Item 1";
             this.ckA.UseVisualStyleBackColor = true;
             // 
             // ckB
@@ -82,7 +80,7 @@ namespace NeuralNetworkTesting
             this.ckB.Name = "ckB";
             this.ckB.Size = new System.Drawing.Size(33, 17);
             this.ckB.TabIndex = 4;
-            this.ckB.Text = "B";
+            this.ckB.Text = "Item 2";
             this.ckB.UseVisualStyleBackColor = true;
             // 
             // label1
@@ -92,7 +90,7 @@ namespace NeuralNetworkTesting
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(166, 13);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Neural Network Training for X-OR";
+            this.label1.Text = "defaults to XOR";
             // 
             // Form1
             // 
@@ -105,8 +103,8 @@ namespace NeuralNetworkTesting
             this.Controls.Add(this.lblResult);
             this.Controls.Add(this.btnTest);
             this.Controls.Add(this.btnTrain);
-            this.Name = "Form1";
-            this.Text = "X-OR Neural Network";
+            this.Name = "Back Propagation";
+            this.Text = "2 channel";
             this.ResumeLayout(false);
             this.PerformLayout();
 

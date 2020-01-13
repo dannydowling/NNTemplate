@@ -7,25 +7,16 @@ namespace NeuralNetworkTesting.Types
 {
     public class NeuralNet : INeuralNet
     {
-        #region Constructors
-
         public NeuralNet()
         {
-            m_learningRate = 0.5;
+            m_learningRate = 0.2;
         }
-
-        #endregion
-
-        #region Member Variables
 
         private INeuralLayer m_inputLayer;
         private INeuralLayer m_outputLayer;
         private INeuralLayer m_hiddenLayer;
         private double m_learningRate;
 
-        #endregion
-
-        #region INeuralNet Members
 
         public INeuralLayer PerceptionLayer
         {
@@ -104,9 +95,6 @@ namespace NeuralNetworkTesting.Types
             }
         }
 
-        #endregion
-
-        #region Methods
 
         public void Initialize(int randomSeed,
             int inputNeuronCount, int hiddenNeuronCount, int outputNeuronCount)
@@ -119,26 +107,13 @@ namespace NeuralNetworkTesting.Types
             PreparePerceptionLayerForPulse(this, input);
         }
 
-        #region Private Static Utility Methods -----------------------------------------------
-
-        private static void Initialize(NeuralNet net, int randomSeed,
+        private void Initialize(NeuralNet net, int randomSeed,
             int inputNeuronCount, int hiddenNeuronCount, int outputNeuronCount)
         {
 
-            #region Declarations
-
             int i, j;
             Random rand;
-
-            #endregion
-
-            #region Initialization
-
             rand = new Random(randomSeed);
-
-            #endregion
-
-            #region Execution
 
             net.m_inputLayer = new NeuralLayer();
             net.m_outputLayer = new NeuralLayer();
@@ -163,20 +138,14 @@ namespace NeuralNetworkTesting.Types
                 for (j = 0; j < net.m_hiddenLayer.Count; j++)
                     net.m_outputLayer[i].Input.Add(net.HiddenLayer[j], new NeuralFactor(rand.NextDouble()));
 
-            #endregion
         }
 
-        private static void CalculateErrors(NeuralNet net, double[] desiredResults)
+        private void CalculateErrors(NeuralNet net, double[] desiredResults)
         {
-            #region Declarations
 
             int i, j;
             double temp, error;
             INeuron outputNode, hiddenNode;
-
-            #endregion
-
-            #region Execution
 
             // Calcualte output error values 
             for (i = 0; i < net.m_outputLayer.Count; i++)
@@ -203,46 +172,33 @@ namespace NeuralNetworkTesting.Types
                 hiddenNode.Error = error;
 
             }
-
-            #endregion
         }
 
-        private static double SigmoidDerivative(double value)
+        private double SigmoidDerivative(double value)
         {
             return value * (1.0F - value);
         }
 
-        public static void PreparePerceptionLayerForPulse(NeuralNet net, double[] input)
+        public void PreparePerceptionLayerForPulse(NeuralNet net, double[] input)
         {
-            #region Declarations
-
+            
             int i;
-
-            #endregion
-
-            #region Execution
-
+            
             if (input.Length != net.m_inputLayer.Count)
                 throw new ArgumentException(string.Format("Expecting {0} inputs for this net", net.m_inputLayer.Count));
 
             // initialize data
             for (i = 0; i < net.m_inputLayer.Count; i++)
                 net.m_inputLayer[i].Output = input[i];
-
-            #endregion
-
+            
         }
 
-        public static void CalculateAndAppendTransformation(NeuralNet net)
+        public void CalculateAndAppendTransformation(NeuralNet net)
         {
-            #region Declarations
 
             int i, j;
             INeuron outputNode, inputNode, hiddenNode;
 
-            #endregion
-
-            #region Execution
 
             // adjust output layer weight change
             for (j = 0; j < net.m_outputLayer.Count; j++)
@@ -252,10 +208,10 @@ namespace NeuralNetworkTesting.Types
                 for (i = 0; i < net.m_hiddenLayer.Count; i++)
                 {
                     hiddenNode = net.m_hiddenLayer[i];
-                    outputNode.Input[hiddenNode].H_Vector += outputNode.Error * hiddenNode.Output;
+                    outputNode.Input[hiddenNode].trainingVector += outputNode.Error * hiddenNode.Output;
                 }
 
-                outputNode.Bias.H_Vector += outputNode.Error * outputNode.Bias.Weight;
+                outputNode.Bias.trainingVector += outputNode.Error * outputNode.Bias.Weight;
             }
 
             // adjust hidden layer weight change
@@ -266,33 +222,21 @@ namespace NeuralNetworkTesting.Types
                 for (i = 0; i < net.m_inputLayer.Count; i++)
                 {
                     inputNode = net.m_inputLayer[i];
-                    hiddenNode.Input[inputNode].H_Vector += hiddenNode.Error * inputNode.Output;
+                    hiddenNode.Input[inputNode].trainingVector += hiddenNode.Error * inputNode.Output;
                 }
 
-                hiddenNode.Bias.H_Vector += hiddenNode.Error * hiddenNode.Bias.Weight;
+                hiddenNode.Bias.trainingVector += hiddenNode.Error * hiddenNode.Bias.Weight;
             }
 
-            #endregion
         }
 
 
-        #region Backprop
-
-        public static void BackPropogation_TrainingSession(NeuralNet net, double[] input, double[] desiredResult)
+        public void BackPropogation_TrainingSession(NeuralNet net, double[] input, double[] desiredResult)
         {
             PreparePerceptionLayerForPulse(net, input);
             net.Pulse();
             CalculateErrors(net, desiredResult);
             CalculateAndAppendTransformation(net);
         }
-
-        #endregion
-
-        #endregion Private Static Utility Methods -------------------------------------------
-
-
-        #endregion
-
-
     }
 }

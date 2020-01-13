@@ -6,3 +6,11 @@ C:\Users\Danny\Desktop\AI_NeuralNetwork\NeuralNetworkTesting\obj\Debug\NeuralNet
 C:\Users\Danny\Desktop\AI_NeuralNetwork\NeuralNetworkTesting\obj\Debug\NeuralNetworkTesting.pdb
 C:\Users\Danny\Desktop\AI_NeuralNetwork\NeuralNetworkTesting\bin\Debug\NeuralNetworkTesting.exe
 C:\Users\Danny\Desktop\AI_NeuralNetwork\NeuralNetworkTesting\bin\Debug\NeuralNetworkTesting.pdb
+C:\Users\Danny\Source\Repos\dannydowling\NNTemplate\NeuralNetworkTesting\bin\Debug\NeuralNetworkTesting.exe
+C:\Users\Danny\Source\Repos\dannydowling\NNTemplate\NeuralNetworkTesting\bin\Debug\NeuralNetworkTesting.pdb
+C:\Users\Danny\Source\Repos\dannydowling\NNTemplate\NeuralNetworkTesting\obj\Debug\NeuralNetwork.csprojAssemblyReference.cache
+C:\Users\Danny\Source\Repos\dannydowling\NNTemplate\NeuralNetworkTesting\obj\Debug\NeuralNetworkTesting.TrainingForm.resources
+C:\Users\Danny\Source\Repos\dannydowling\NNTemplate\NeuralNetworkTesting\obj\Debug\NeuralNetworkTesting.Properties.Resources.resources
+C:\Users\Danny\Source\Repos\dannydowling\NNTemplate\NeuralNetworkTesting\obj\Debug\NeuralNetwork.csproj.GenerateResource.cache
+C:\Users\Danny\Source\Repos\dannydowling\NNTemplate\NeuralNetworkTesting\obj\Debug\NeuralNetworkTesting.exe
+C:\Users\Danny\Source\Repos\dannydowling\NNTemplate\NeuralNetworkTesting\obj\Debug\NeuralNetworkTesting.pdb
